@@ -3,7 +3,7 @@ import Article from './Article'
 
 export default function ArticleList(props) {
     const { articles } = props
-    const articleElements = articles.map(article => <li key = {article.id}><Article article = {article} /></li>)
+    const articleElements = articles.map(article => <li key={article.id}><Article article={article} comments={article.comments}/></li>)
     return (
         <div>
             <h2>Article List</h2>

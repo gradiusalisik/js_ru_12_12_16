@@ -2,26 +2,8 @@ import React, { Component } from 'react'
 
 export default class Article extends Component {
     state = {
-        isOpen: false
-    }
-
-/*
-    constructor() {
-        super()
-        this.state = {
-            isOpen: false
-        }
-    }
-*/
-
-    render() {
-        const { article } = this.props
-        return (
-            <div>
-                <h3 onClick = {this.toggleOpen}>{article.title}</h3>
-                {this.getBody()}
-            </div>
-        )
+        isOpen: false,
+        isOpenComments: false
     }
 
     toggleOpen = () => {
@@ -31,11 +13,61 @@ export default class Article extends Component {
     }
 
     getBody() {
+        const { article, comments } = this.props
+        const style = {
+            cursor: 'pointer'
+        }
         if (!this.state.isOpen) return null
         return (
             <section>
-                {this.props.article.text}
+                {article.text}
+                { comments &&
+                    <div>
+                    <button style={style} onClick={this.toggleOpenComments}>
+                        {this.state.isOpenComments ? 'Hide': 'Show'}
+                    </button>
+                    </div>
+                }
+                {this.getComments()}
             </section>
+        )
+    }
+
+    toggleOpenComments = () => {
+        this.setState({
+            isOpenComments: !this.state.isOpenComments
+        })
+    }
+
+    getComments() {
+        const { comments } = this.props
+        if (!this.state.isOpenComments) return null
+        return (
+            <div>
+                <ul>
+                    {comments && comments.map(comment => {
+                        return (
+                            <li key={comment.id}>
+                                <span>{comment.user}</span>
+                                <div>{comment.text}</div>
+                            </li>
+                        )
+                    })}
+                </ul>
+            </div>
+        )
+    }
+
+    render() {
+        const { article } = this.props
+        const style = {
+            cursor: 'pointer'
+        }
+        return (
+            <div>
+                <h3 style={style} onClick = {this.toggleOpen}>{article.title}</h3>
+                {this.getBody()}
+            </div>
         )
     }
 }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+//лучше разбить этот компонент на несколько более мелких(отдельно CommentList, а в идеале и Comment)
 export default class Article extends Component {
     state = {
         isOpen: false,
@@ -21,6 +21,7 @@ export default class Article extends Component {
         return (
             <section>
                 {article.text}
+                {/*не пиши много кода внутри JSX, очень быстро становится нечитабельным*/}
                 { comments &&
                     <div>
                     <button style={style} onClick={this.toggleOpenComments}>

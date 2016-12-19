@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-//лучше разбить этот компонент на несколько более мелких(отдельно CommentList, а в идеале и Comment)
+import CommentList from './CommentList/CommentList'
+
 export default class Article extends Component {
     state = {
-        isOpen: false,
-        isOpenComments: false
+        isOpen: false
     }
 
     toggleOpen = () => {
@@ -21,41 +21,8 @@ export default class Article extends Component {
         return (
             <section>
                 {article.text}
-                {/*не пиши много кода внутри JSX, очень быстро становится нечитабельным*/}
-                { comments &&
-                    <div>
-                    <button style={style} onClick={this.toggleOpenComments}>
-                        {this.state.isOpenComments ? 'Hide': 'Show'}
-                    </button>
-                    </div>
-                }
-                {this.getComments()}
+                <CommentList comments={comments} />
             </section>
-        )
-    }
-
-    toggleOpenComments = () => {
-        this.setState({
-            isOpenComments: !this.state.isOpenComments
-        })
-    }
-
-    getComments() {
-        const { comments } = this.props
-        if (!this.state.isOpenComments) return null
-        return (
-            <div>
-                <ul>
-                    {comments && comments.map(comment => {
-                        return (
-                            <li key={comment.id}>
-                                <span>{comment.user}</span>
-                                <div>{comment.text}</div>
-                            </li>
-                        )
-                    })}
-                </ul>
-            </div>
         )
     }
 

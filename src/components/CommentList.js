@@ -1,27 +1,34 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes as pt } from 'react'
 import Comment from './Comment'
 import toggleOpen from '../decorators/toggleOpen'
 
 class CommentList extends Component {
+    static propTypes = {
+        toggleOpen: pt.func,
+        comments: pt.array,
+        isOpen: pt.bool
+    }
+
     static defaultProps = {
-        comments: []
+        comments: [],
+        toggleOpen: () => {}
     }
 
-    componentWillMount() {
-        console.log('---', 1)
-    }
+    // componentWillMount() {
+    //     console.log('---', 1)
+    // }
 
-    componentDidMount() {
-        console.log('---', 2)
-    }
+    // componentDidMount() {
+    //     console.log('---', 2)
+    // }
 
-    componentWillUnmount() {
-        console.log('---', 3)
-    }
+    // componentWillUnmount() {
+    //     console.log('---', 3)
+    // }
 
-    componentWillReceiveProps(nextProps) {
-        console.log('---', 'updating to toggle open', this.props.isOpen !== nextProps.isOpen)
-    }
+    // componentWillReceiveProps(nextProps) {
+    //     console.log('---', 'updating to toggle open', this.props.isOpen !== nextProps.isOpen)
+    // }
 
     render() {
         return (
@@ -33,8 +40,9 @@ class CommentList extends Component {
     }
 
     getLink() {
-        return <a href="#" onClick = {this.props.toggleOpen}>
-            {this.props.isOpen ? 'hide' : 'show'} comments
+        const { isOpen, toggleOpen } = this.props
+        return <a href="#" onClick = {toggleOpen}>
+            {isOpen ? 'hide' : 'show'} comments
         </a>
     }
 

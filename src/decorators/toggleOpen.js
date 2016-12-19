@@ -7,11 +7,16 @@ export default function toggleOpen(Component) {
             isOpen: false,
         }
         render() {
-            return <Component {...this.props} {...this.state} toggleOpen = {this.toggleOpen}/>
+            return <Component
+                {...this.props}
+                {...this.state}
+                isOpen={this.state.isOpen}
+                toggleOpen={this.toggleOpen}
+                />
         }
 
         toggleOpen = (ev) => {
-            ev && ev.preventDefault && ev.preventDefault()
+            if (ev) ev.preventDefault()
             this.setState({
                 isOpen: !this.state.isOpen
             })

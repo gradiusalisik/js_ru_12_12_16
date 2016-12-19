@@ -1,39 +1,41 @@
-import React, {PropTypes} from 'react'
+import React, { Component, PropTypes as pt} from 'react'
 import Article from './Article'
 import Chart from './Chart'
+import AccordeonToggle from '../decorators/accordeonToggle'
 
-export default class ArticleList extends React.Component {
-    state = {
-        openArticleId: null
+class ArticleList extends Component {
+
+    static propTypes = {
+        articles: pt.array
     }
+
+    static defaultProps = {
+        articles: []
+    }
+
     render() {
-        const {articles} = this.props
-        const articleElements = articles.map(article =>
-            <li key={article.id}>
+        const { articles, openArticleId, onToggleAccrordeon } = this.props
+        const articleElements = articles.map(article => {
+            const isOpen = openArticleId === article.id
+            return <li key={article.id}>
                 <Article article={article}
-                         isOpen={this.state.openArticleId == article.id}
-                         onClick={this.toggleOpenArticle(article.id)}
+                    isOpen={isOpen}
+                    onClick={onToggleAccrordeon(article.id, isOpen)}
                 />
-            </li>)
+            </li>
+
+        })
+
         return (
             <div>
                 <h2>Article List</h2>
                 <ul>
-                    {/*some comment*/}
                     {articleElements}
                 </ul>
                 <Chart articles={articles}/>
             </div>
         )
     }
-
-    toggleOpenArticle = id => ev => {
-        this.setState({
-            openArticleId: id
-        })
-    }
 }
 
-ArticleList.propTypes = {
-    articles: PropTypes.array.isRequired
-}
+export default AccordeonToggle(ArticleList)

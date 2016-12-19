@@ -1,9 +1,16 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component, PropTypes as pt} from 'react'
 import CommentList from './CommentList'
+import toggleOpen from '../decorators/toggleOpen'
 
 export default class Article extends Component {
     static propTypes = {
-        article: PropTypes.object.isRequired
+        article: pt.object.isRequired,
+        onClick: pt.func,
+        isOpen: pt.bool
+    }
+
+    static defaultProps = {
+        onClick: () => {}
     }
 
     componentDidMount() {
@@ -21,11 +28,13 @@ export default class Article extends Component {
     }
 
     getBody() {
-        if (!this.props.isOpen) return null
+        const { isOpen, article } = this.props
+
+        if (!isOpen) return null
         return (
             <section>
-                {this.props.article.text}
-                <CommentList comments = {this.props.article.comments} />
+                {article.text}
+                <CommentList comments = {article.comments} />
             </section>
         )
     }

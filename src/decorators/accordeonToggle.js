@@ -4,6 +4,7 @@ import React from 'react'
 export default function AccordeonToggle(Component) {
     return class WrapperComponent extends React.Component {
         state = {
+          //суть декораторов в переисползовании кода, не привязывайся к названиям сущностей. Лучше openItemId
           openArticleId: null,
         }
 
@@ -19,6 +20,7 @@ export default function AccordeonToggle(Component) {
         }
 
         toggleOpenArticle = (activeId, isOpen) => () => {
+          //ок, но я б предпочел в один setState записать и isOpen тут решать - незачем усложнять Api ползователям
           if (isOpen) {
             this.setState({
               openArticleId: null

@@ -14,9 +14,9 @@ class ArticleList extends Component {
     }
 
     render() {
-        const { articles, openArticleId, onToggleAccrordeon } = this.props
+        const { articles, openItemId, onToggleAccrordeon } = this.props
         const articleElements = articles.map(article => {
-            const isOpen = openArticleId === article.id
+            const isOpen = openItemId === article.id
             return <li key={article.id}>
                 <Article article={article}
                     isOpen={isOpen}

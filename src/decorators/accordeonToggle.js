@@ -4,7 +4,7 @@ import React from 'react'
 export default function AccordeonToggle(Component) {
     return class WrapperComponent extends React.Component {
         state = {
-          openArticleId: null,
+          openItemId: null,
         }
 
 
@@ -19,16 +19,9 @@ export default function AccordeonToggle(Component) {
         }
 
         toggleOpenArticle = (activeId, isOpen) => () => {
-          if (isOpen) {
             this.setState({
-              openArticleId: null
+              openItemId: isOpen ? null : activeId
             })
-          } else {
-             this.setState({
-              openArticleId: activeId
-            })
-          }
-
         }
     }
 }

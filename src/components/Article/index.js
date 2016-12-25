@@ -17,14 +17,13 @@ export default class Article extends Component {
      shouldComponentUpdate(nextProps, nextState) {
      return this.props.isOpen != nextProps.isOpen
      }
-     */
+
 
     componentWillUpdate() {
         console.log('---', 'updating article')
     }
-
+*/
     render() {
-        console.log('---', 123)
         const { article, onClick } = this.props
         return (
             <div ref = "container">

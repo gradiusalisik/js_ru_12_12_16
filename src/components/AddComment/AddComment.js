@@ -9,6 +9,7 @@ class AddComment extends Component {
   }
 
   state = {
+    //ок, но я просил user и text
     value: ''
   }
 

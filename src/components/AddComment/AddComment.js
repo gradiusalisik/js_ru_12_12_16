@@ -9,17 +9,24 @@ class AddComment extends Component {
   }
 
   state = {
-    value: ''
+    user: '',
+    text: ''
   }
 
-  handleChange = e => {
+  handleChangeUser = e => {
     this.setState({
-      value: e.target.value
+      user: e.target.value
+    })
+  }
+
+  handleChangeText = e => {
+    this.setState({
+      text: e.target.value
     })
   }
 
   handleClick = () => {
-    console.log(this.state.value);
+    console.log(this.state);
   }
 
   render() {
@@ -28,12 +35,19 @@ class AddComment extends Component {
           <p className='addComment__text'>
             Your comment:
           </p>
+          <input
+            className='addComment__input'
+            type='text'
+            placeholder='Напишите имя'
+            value={this.state.user}
+            onChange={this.handleChangeUser}
+          />
           <textarea
             className='addComment__textarea'
             type='text'
             placeholder='Напишите комментарий'
-            value={this.state.value}
-            onChange={this.handleChange}
+            value={this.state.text}
+            onChange={this.handleChangeText}
           />
           <div>
             <button className='addComment__button' onClick={this.handleClick}> Добавить </button>

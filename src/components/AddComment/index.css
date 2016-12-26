@@ -7,6 +7,15 @@
   font-weight: bold;
 }
 
+.addComment__input {
+  display: block;
+  margin-bottom: 10px;
+  padding-left: 15px;
+  font-size: 20px;
+  height: 30px;
+  width: 600px;
+}
+
 .addComment__textarea {
   padding-top: 15px;
   padding-left: 15px;

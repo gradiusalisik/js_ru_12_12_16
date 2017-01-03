@@ -8,7 +8,9 @@ class Filter extends Component {
     };
 
     state = {
-        selected: null
+        selected: null,
+        company: 'company',
+        name: 'Vasya'
     }
 
     render() {
@@ -18,7 +20,7 @@ class Filter extends Component {
         }))
         return (
             <div>
-                <Select options={options} value={this.state.selected} onChange={this.handleChange} multi={true}/>
+                <Select labelKey={this.state.company + '_hello_' + this.state.name} options={options} value={this.state.selected} onChange={this.handleChange} multi={true}/>
             </div>
         )
     }

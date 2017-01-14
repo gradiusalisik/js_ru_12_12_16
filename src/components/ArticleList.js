@@ -40,8 +40,15 @@ ArticleList.propTypes = {
 
 export default connect(
     (state) => {
+        const {selected} = state.filters
+        const { from , to } = state.filters.dateRange
+        const filterArticles = state.articles.filter(article => {
+            const published = Date.parse(article.date)
+            return (!selected.length || selected.includes(article.id)) &&
+                (!from || !to || (published > from && published < to))
+        })
         return {
-            articles: state.articles
+            articles: filterArticles
         }
     }
 )(accordion(ArticleList))

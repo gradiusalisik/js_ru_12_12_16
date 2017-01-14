@@ -34,6 +34,6 @@ class ArticlesSelect extends Component {
 }
 
 export default connect(state => ({
-    selected: state.filters.seleted,
+    selected: state.filters.selected,
     articles: state.articles
 }), { filterArticleSelect })(ArticlesSelect)

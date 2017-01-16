@@ -32,16 +32,9 @@ class CommentList extends Component {
     }
 
     handleCommentAdd = newComment => {
-        const newComments = this.props.comments.slice()
-        console.log('1', this.props.comments)
-        newComments.push(newComment)
-        this.setState({
-            comments: newComments
-        })
-        // this.props.addComment(newComment)
-        debugger
-        console.log('2', this.state.comments)
-        console.log('3', this.props.comments)
+        const { articleId } = this.props
+        this.props.addComment(articleId, newComment)
+        console.log(articleId, newComment)
     }
 
     getBody() {
@@ -61,7 +54,6 @@ class CommentList extends Component {
 }
 
 export default connect((storeState, props) => {
-    // debugger
     return {
         comments: props.commentsIds.map(id => storeState.comments.get(id))
     }

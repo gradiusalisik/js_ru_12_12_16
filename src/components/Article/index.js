@@ -44,11 +44,15 @@ class Article extends Component {
     }
 
     getBody() {
-        if (!this.props.isOpen) return null
+        const {article, isOpen} = this.props
+        if (!isOpen) return null
         return (
             <section>
-                {this.props.article.text}
-                <CommentList commentsIds = {this.props.article.comments} />
+                {article.text}
+                <CommentList
+                    articleId={article.id}
+                    commentsIds={article.comments}
+                />
             </section>
         )
     }

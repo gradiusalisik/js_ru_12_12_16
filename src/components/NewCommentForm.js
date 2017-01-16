@@ -7,7 +7,8 @@ class NewCommentForm extends Component {
 
     state = {
         text: '',
-        user: ''
+        user: '',
+        id: Date.now()
     }
 
     handleChange = field => ev => {
@@ -17,8 +18,14 @@ class NewCommentForm extends Component {
     }
 
     handleSubmit = ev => {
+        const { text, user, id } = this.state;
+        const newComments = {
+            text: text,
+            user: user,
+            id: id
+        }
         ev.preventDefault()
-        this.props.addComment(this.state)
+        this.props.addComment(newComments)
         this.setState({
             user: '',
             text: ''

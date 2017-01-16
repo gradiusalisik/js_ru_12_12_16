@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import Comment from './Comment'
 import toggleOpen from '../decorators/toggleOpen'
 import NewCommentForm from './NewCommentForm'
+import { addComment } from '../AC'
 import {connect} from 'react-redux'
 
 class CommentList extends Component {
@@ -9,6 +10,10 @@ class CommentList extends Component {
         commentsIds: PropTypes.array,
         isOpen: PropTypes.bool,
         toggleOpen: PropTypes.func
+    }
+
+    state = {
+        comments : []
     }
 
     render() {
@@ -26,16 +31,29 @@ class CommentList extends Component {
         </a>
     }
 
+    handleCommentAdd = newComment => {
+        const newComments = this.props.comments.slice()
+        console.log('1', this.props.comments)
+        newComments.push(newComment)
+        this.setState({
+            comments: newComments
+        })
+        // this.props.addComment(newComment)
+        debugger
+        console.log('2', this.state.comments)
+        console.log('3', this.props.comments)
+    }
+
     getBody() {
         const { comments, isOpen } = this.props
         if (!isOpen) return null
-        const form = <NewCommentForm addComment={(comment) => console.log(comment)} />
+        const form = <NewCommentForm addComment={this.handleCommentAdd} />
         if (!comments.length) return <div><p>No comments yet</p>{form}</div>
 
         const commentItems = comments.map(comment => <li key = {comment.id}><Comment comment = {comment} /></li>)
         return (
             <div>
-                <ul>{commentItems}</ul>
+                <ul ref='list'>{commentItems}</ul>
                 {form}
             </div>
         )
@@ -43,7 +61,8 @@ class CommentList extends Component {
 }
 
 export default connect((storeState, props) => {
+    // debugger
     return {
         comments: props.commentsIds.map(id => storeState.comments.get(id))
     }
-})(toggleOpen(CommentList))
+}, {addComment})(toggleOpen(CommentList))

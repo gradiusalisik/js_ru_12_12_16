@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import Comment from './Comment'
 import toggleOpen from '../decorators/toggleOpen'
 import NewCommentForm from './NewCommentForm'
-import { addComment } from '../AC'
+import { addComment, deleteComment } from '../AC'
 import {connect} from 'react-redux'
 
 class CommentList extends Component {
@@ -37,13 +37,25 @@ class CommentList extends Component {
         console.log(articleId, newComment)
     }
 
+    handleDelete = id => () => {
+        const { articleId } = this.props
+        this.props.deleteComment(articleId, id)
+    }
+
     getBody() {
         const { comments, isOpen } = this.props
         if (!isOpen) return null
         const form = <NewCommentForm addComment={this.handleCommentAdd} />
         if (!comments.length) return <div><p>No comments yet</p>{form}</div>
 
-        const commentItems = comments.map(comment => <li key = {comment.id}><Comment comment = {comment} /></li>)
+        const commentItems = comments.map(comment =>
+            <div key={comment.id}>
+                <li><Comment comment={comment} /></li>
+                <div>
+                    <a href="#" onClick = {this.handleDelete(comment.id)}>delete comment</a>
+                </div>
+            </div>
+        )
         return (
             <div>
                 <ul ref='list'>{commentItems}</ul>
@@ -57,4 +69,4 @@ export default connect((storeState, props) => {
     return {
         comments: props.commentsIds.map(id => storeState.comments.get(id))
     }
-}, {addComment})(toggleOpen(CommentList))
+}, {addComment, deleteComment})(toggleOpen(CommentList))

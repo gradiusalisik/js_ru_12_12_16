@@ -1,4 +1,4 @@
-import { DELETE_ARTICLE, ADD_COMMENT } from '../constants'
+import { DELETE_ARTICLE, ADD_COMMENT, DELETE_COMMENT } from '../constants'
 import { normalizedArticles } from '../fixtures'
 import { arrayToMap } from '../helpers'
 import { Record } from 'immutable'
@@ -22,6 +22,8 @@ export default (articlesState = defaultState, action) => {
 
         case ADD_COMMENT:
             return articlesState.updateIn([payload.articleId, 'comments'], comments => comments.concat(randomId))
+        case DELETE_COMMENT:
+            return articlesState.updateIn([payload.articleId, 'comments'], comments => comments.delete({ id: payload.id }))
     }
 
     return articlesState

@@ -24,7 +24,7 @@ export default (articlesState = defaultState, action) => {
             return articlesState.updateIn([payload.articleId, 'comments'], comments => comments.concat(randomId))
 
         case DELETE_COMMENT:
-            return articlesState.updateIn([payload.articleId, 'comments'], comments => comments.filter(comment => comment.id != payload.id))
+            return articlesState.updateIn([payload.articleId, 'comments'], comments => comments.filter(comment => comment != payload.id))
     }
 
     return articlesState

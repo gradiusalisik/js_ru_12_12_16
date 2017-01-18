@@ -32,7 +32,7 @@ export function loadAllArticles() {
 
 export function loadArticleById(id) {
     return (dispatch, getState) => {
-        if (getState().articles.getIn(['entities', id, 'text'])) return null
+        // if (getState().articles.getIn(['entities', id, 'text'])) return null
 
         dispatch({
             type: LOAD_ARTICLE + START,

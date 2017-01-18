@@ -14,6 +14,7 @@ class CommentList extends Component {
     }
 
     componentDidMount() {
+        //вот это, все же должно жить в componentWillReceiveProps, иначе ты загружаешь при открытии статьи, а не списка
         this.props.loadCommentById(this.props.article.id)
     }
 
@@ -45,6 +46,7 @@ class CommentList extends Component {
         const commentItems = comments.map(comment => {
             return <li key={comment.id}><Comment comment={comment} /></li>
         })
+        //еще лоадер нужен был
         return (
             <div>
                 <ul>{commentItems}</ul>

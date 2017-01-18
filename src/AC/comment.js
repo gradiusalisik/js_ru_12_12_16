@@ -11,6 +11,7 @@ import $ from 'jquery'
 
 export function loadCommentById(id) {
   return (dispatch, getState) => {
+      //еще следовало сделать проверку, нужно ли загружать комменты
     // if (getState().articles.getIn(['entities', id, 'text'])) return null
 
     dispatch({

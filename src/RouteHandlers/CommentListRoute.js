@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import CommentList from '../components/CommentList'
+import CommentList from '../components/CommentAllList'
 
 class CommentListRoute extends Component {
     static propTypes = {
@@ -9,7 +9,7 @@ class CommentListRoute extends Component {
     render() {
         return (
             <div>
-                <CommentList comments={this.props.params.id} article = {this.props.article} />
+                <CommentList />
                 {this.props.children}
             </div>
         )

@@ -10,6 +10,7 @@ class CommentsAllList extends Component {
   }
 
   componentDidMount() {
+    //ок, но задача была сделать пагинацию, а не просто список всех комментов
     this.props.loadAllComments()
   }
 

@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import Comment from './Comment'
 import { loadAllComments } from '../AC'
 import { mapToArray } from '../helpers'
+import Loader from './Loader'
 import {connect} from 'react-redux'
 
 class CommentsAllList extends Component {
@@ -13,25 +14,31 @@ class CommentsAllList extends Component {
   }
 
   render() {
+    const { loading } = this.props
+    const loader = loading && <Loader />
+    console.log('loader',loader);
     return (
       <div>
-          {this.getBody()}
+        {this.getBody()}
+        {loader}
       </div>
     )
   }
 
   getBody() {
-    const { comments } = this.props
-    console.log(comments);
+    const { comments, loading } = this.props
     const commentItems = comments.map(comment => <li key = {comment.id}><Comment comment = {comment} /></li>)
     return (
       <div>
-          <ul>{commentItems}</ul>
+        <ul>{commentItems}</ul>
       </div>
     )
   }
 }
 
 export default connect(state => {
-  comments: mapToArray(state.comments.entities)
+  return {
+    comments: mapToArray(state.comments.entities),
+    loading: state.comments.loading
+  }
 }, { loadAllComments })(CommentsAllList)

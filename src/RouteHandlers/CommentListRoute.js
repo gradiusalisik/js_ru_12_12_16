@@ -9,7 +9,7 @@ class CommentListRoute extends Component {
     render() {
         return (
             <div>
-                <CommentList />
+                <CommentList comments={this.props.params.id} article = {this.props.article} />
                 {this.props.children}
             </div>
         )

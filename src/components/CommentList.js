@@ -8,6 +8,7 @@ import {connect} from 'react-redux'
 
 class CommentList extends Component {
     static propTypes = {
+        id: PropTypes.string.isRequired,
         article: PropTypes.object,
         isOpen: PropTypes.bool,
         toggleOpen: PropTypes.func

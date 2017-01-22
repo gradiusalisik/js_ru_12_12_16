@@ -2,6 +2,8 @@ import React from 'react'
 import {Router, Route, hashHistory, browserHistory} from 'react-router'
 import App from './RouteHandlers/App'
 import ArticleList from './RouteHandlers/ArticleListRoute'
+import CommentList from './RouteHandlers/CommentListRoute'
+// import Comment from './RouteHandlers/CommentRoute'
 import Article from './RouteHandlers/ArticleRoute'
 import Filters from './RouteHandlers/Filters'
 import NotFound from './RouteHandlers/NotFound'
@@ -12,7 +14,8 @@ export default (
             <Route path="articles" component={ArticleList}>
                 <Route path=":id" component={Article} />
             </Route>
-
+            <Route path="comments" component={CommentList}>
+            </Route>
             <Route path="filters" component={Filters}/>
             <Route path="*" component={NotFound} />
         </Route>

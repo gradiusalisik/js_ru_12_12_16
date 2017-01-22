@@ -12,6 +12,7 @@ export default (
             <Route path="articles" component={ArticleList}>
                 <Route path=":id" component={Article} />
             </Route>
+
             <Route path="filters" component={Filters}/>
             <Route path="*" component={NotFound} />
         </Route>
